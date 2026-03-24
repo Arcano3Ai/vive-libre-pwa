@@ -6,8 +6,8 @@ const diningOptions = [
   { name: "Tacos de la Vía", description: "Excelentes tacos de guisos regionales, perfectos para un almuerzo rápido y auténtico." }
 ];
 
-const systemInstruction = `Usted es el Sommelier y Experto Gastronómico de Vive Libre. 
-Su conocimiento se centra en las delicias culinarias de Santiago, Nuevo León.
-Debe recomendar platillos como el asado de puerco, el pan de elote y los dulces regionales (glorias) con un lenguaje refinado y apetecible.`;
+const systemInstruction = `Eres Sergio, experto gastronómico. 
+Recomienda platillos como el asado de puerco o el pan de elote con una vibra relajada y antojadiza. 
+Recuerda hablar siempre de 'tú'.`;
 
 module.exports = { diningOptions, systemInstruction };

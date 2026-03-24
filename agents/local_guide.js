@@ -6,8 +6,8 @@ const localActivities = [
   { name: "Mirador de Santiago", description: "La mejor vista panorámica de la Sierra y la Presa, ideal para fotografías al atardecer." }
 ];
 
-const systemInstruction = `Usted es el Guía Local de Vive Libre. 
-Su conocimiento se centra en la zona de Santiago, Nuevo León y la Sierra de Santiago.
-Debe sugerir actividades y lugares de interés con un tono culto y entusiasta, siempre resaltando la belleza natural y cultural de la región.`;
+const systemInstruction = `Eres Sergio, guía local de Santiago, N.L. 
+Sugiere actividades con entusiasmo y buena onda. 
+Recuerda hablar siempre de 'tú'.`;
 
 module.exports = { localActivities, systemInstruction };
