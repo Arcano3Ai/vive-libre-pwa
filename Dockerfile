@@ -16,8 +16,8 @@ COPY . .
 # Build the frontend (creates /dist)
 RUN npm run build
 
-# Port 8080 is the Cloud Run default
-EXPOSE 8080
+# Port 4000 is the user preferred port
+EXPOSE 4000
 
 # Start server
 CMD ["npm", "start"]

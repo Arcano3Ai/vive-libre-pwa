@@ -11,7 +11,7 @@ const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
