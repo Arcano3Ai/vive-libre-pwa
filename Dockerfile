@@ -1,26 +1,21 @@
-# Use Node.js LTS
-FROM node:20-slim
-
-# Set working directory
+# Stage 1: Build
+FROM node:20 AS builder
 WORKDIR /app
-
-# Copy package files
 COPY package*.json ./
-
-# Install ALL dependencies (including devDeps for the build)
 RUN npm install
-
-# Copy project files
 COPY . .
-
-# Build the frontend (Vite)
 RUN npm run build
 
-# Clean up dev dependencies to save space (Optional but recommended)
-# RUN npm prune --production
-
-# Port 4000 is used by server.js
+# Stage 2: Run
+FROM node:20-slim
+WORKDIR /app
+# Copy only necessary files
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/server.js ./
+COPY --from=builder /app/agents ./agents
+# Install only production dependencies
+RUN npm install --production
+# Ensure port 4000
 EXPOSE 4000
-
-# Start command
 CMD ["node", "server.js"]
