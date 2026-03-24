@@ -6,20 +6,20 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 8080;
 
-// --- 1. ARRANQUE INSTANTÁNEO ---
+// --- 1. BOOTSTRAP ---
 const server = http.createServer(app);
 server.listen(port, '0.0.0.0', () => {
-  console.log(`✅ Butler online on port ${port}`);
+  console.log(`Server listening on port ${port}`);
 });
 
-// --- 2. MIDDLEWARES ---
+// --- 2. CONFIG ---
 app.use(express.json());
 const distPath = path.join(__dirname, 'dist');
 
 // Health Check
 app.get('/api/health', (req, res) => res.status(200).send('Sergio is alive'));
 
-// --- 3. CARGA SEGURA DE IA ---
+// --- 3. IA ENGINE ---
 let genAI = null;
 let orchestrator = null;
 
@@ -31,18 +31,16 @@ const initAI = () => {
             app.use(cors());
             orchestrator = require('./agents/orchestrator');
             genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
-            console.log('✅ IA Engine ready');
+            console.log('AI Engine ready');
         } catch (e) {
-            console.error('❌ IA Load Error:', e.message);
+            console.error('AI Init Error:', e.message);
         }
     }
 };
 
-// --- 4. ENDPOINTS ---
 app.post('/api/chat', async (req, res) => {
     initAI();
-    if (!genAI || !orchestrator) return res.status(500).send('IA no inicializada');
-    
+    if (!genAI || !orchestrator) return res.status(500).send('IA Error');
     const { message, history } = req.body;
     try {
         const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash", systemInstruction: orchestrator.unifiedSystemInstruction });
@@ -60,12 +58,13 @@ app.post('/api/chat', async (req, res) => {
     }
 });
 
-// --- 5. SERVIR WEB Y PWA ---
+// --- 4. STATIC & SPA ---
 app.use(express.static(distPath));
 
-app.get('/*', (req, res) => {
+// EXPRESS 5 SAFE WILDCARD
+app.get('/:any*', (req, res) => {
     if (req.path.startsWith('/api')) return;
     const index = path.join(distPath, 'index.html');
     if (fs.existsSync(index)) res.sendFile(index);
-    else res.status(404).send('Sitio en construcción. Build de Vite no detectado.');
+    else res.status(404).send('Not Found');
 });
