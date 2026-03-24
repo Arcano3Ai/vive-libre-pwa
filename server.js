@@ -6,17 +6,17 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 8080;
 
-// --- 1. BOOTSTRAP ---
+// --- 1. BOOTSTRAP INMEDIATO ---
 const server = http.createServer(app);
 server.listen(port, '0.0.0.0', () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`✅ Butler is listening on port ${port}`);
 });
 
-// --- 2. CONFIG ---
+// --- 2. CONFIGURACIÓN ---
 app.use(express.json());
 const distPath = path.join(__dirname, 'dist');
 
-// Health Check
+// Health Check explícito
 app.get('/api/health', (req, res) => res.status(200).send('Sergio is alive'));
 
 // --- 3. IA ENGINE ---
@@ -31,19 +31,23 @@ const initAI = () => {
             app.use(cors());
             orchestrator = require('./agents/orchestrator');
             genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
-            console.log('AI Engine ready');
+            console.log('✅ IA Engine ready');
         } catch (e) {
-            console.error('AI Init Error:', e.message);
+            console.error('❌ IA Load Error:', e.message);
         }
     }
 };
 
 app.post('/api/chat', async (req, res) => {
     initAI();
-    if (!genAI || !orchestrator) return res.status(500).send('IA Error');
+    if (!genAI || !orchestrator) return res.status(500).send('IA no inicializada');
+    
     const { message, history } = req.body;
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash", systemInstruction: orchestrator.unifiedSystemInstruction });
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-2.5-flash", 
+            systemInstruction: orchestrator.unifiedSystemInstruction 
+        });
         const chat = model.startChat({
             history: (history || []).map(h => ({
                 role: h.role === 'bot' || h.role === 'model' ? 'model' : 'user',
@@ -54,23 +58,33 @@ app.post('/api/chat', async (req, res) => {
         const resp = await result.response;
         res.send(resp.text());
     } catch (e) {
-        res.status(500).send('Error: ' + e.message);
+        console.error('Chat Error:', e);
+        res.status(500).send('Error de Sergio: ' + e.message);
     }
 });
 
-// --- 4. STATIC & SPA ---
+// --- 4. SERVIR FRONTEND ---
 app.use(express.static(distPath));
 
-// COMPATIBILIDAD TOTAL EXPRESS 5 PARA SPA
-app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) return next();
-    const index = path.join(distPath, 'index.html');
-    if (fs.existsSync(index)) res.sendFile(index);
-    else res.status(404).send('Not Found');
+// SOLUCIÓN FINAL PARA EXPRESS 5: 
+// No usamos app.get('*'). Usamos un middleware final que captura TODO lo que no sea API.
+app.use((req, res) => {
+    // Si la ruta empieza con /api y llegó aquí, es un 404 real de API
+    if (req.url.startsWith('/api')) {
+        return res.status(404).send('API Endpoint not found');
+    }
+    
+    // Para todo lo demás, servimos el index.html (Soporte SPA)
+    const indexFile = path.join(distPath, 'index.html');
+    if (fs.existsSync(indexFile)) {
+        res.sendFile(indexFile);
+    } else {
+        res.status(404).send('Build not found. Please check Cloud Build logs.');
+    }
 });
 
-// Global error handler
+// Manejador de errores global para evitar crasheos
 app.use((err, req, res, next) => {
-    console.error('Server Error:', err);
-    res.status(500).send('Internal Server Error');
+    console.error('CRITICAL SERVER ERROR:', err);
+    res.status(500).send('Something went wrong on the server.');
 });
