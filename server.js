@@ -76,7 +76,12 @@ wss.on('connection', (ws) => {
 app.get('*', (req, res) => {
   if (req.path.startsWith('/api')) return;
   const indexFile = path.join(distPath, 'index.html');
-  res.sendFile(indexFile);
+  
+  if (require('fs').existsSync(indexFile)) {
+    res.sendFile(indexFile);
+  } else {
+    res.status(404).send('Sitio en construcción o error de build. Revisa los logs de Cloud Build.');
+  }
 });
 
 // ARRANQUE CRÍTICO: Escuchar en 0.0.0.0

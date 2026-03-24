@@ -1,5 +1,5 @@
 # Use Node.js LTS
-FROM node:20
+FROM node:20-slim
 
 # Set working directory
 WORKDIR /app
@@ -7,17 +7,20 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
+# Install ALL dependencies (including devDeps for the build)
 RUN npm install
 
-# Copy all project files
+# Copy project files
 COPY . .
 
-# Build the frontend (creates /dist)
+# Build the frontend (Vite)
 RUN npm run build
 
-# Port 4000 is the user preferred port
+# Clean up dev dependencies to save space (Optional but recommended)
+# RUN npm prune --production
+
+# Port 4000 is used by server.js
 EXPOSE 4000
 
-# Start server
-CMD ["npm", "start"]
+# Start command
+CMD ["node", "server.js"]
