@@ -17,7 +17,7 @@ app.use(express.json());
 const distPath = path.join(__dirname, 'dist');
 
 // Health Check
-app.get('/api/health', (req, res) => res.status(200).send('OK'));
+app.get('/api/health', (req, res) => res.status(200).send('Sergio is alive'));
 
 // --- 3. CARGA SEGURA DE IA ---
 let genAI = null;
@@ -62,7 +62,9 @@ app.post('/api/chat', async (req, res) => {
 
 // --- 5. SERVIR WEB Y PWA ---
 app.use(express.static(distPath));
-app.get('*', (req, res) => {
+
+// CORRECCIÓN EXPRESS 5: Wildcard debe ser (.*) o regex
+app.get('/:path((.*))', (req, res) => {
     if (req.path.startsWith('/api')) return;
     const index = path.join(distPath, 'index.html');
     if (fs.existsSync(index)) res.sendFile(index);
