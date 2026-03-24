@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script type="module" crossorigin src="/assets/index-CBw1QYWs.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BaOMXxjH.css">
+    <script type="module" crossorigin src="/assets/index-Tl1NTf4D.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-ll7lE_cP.css">
   </head>
   <body>
     <!-- Clean Luxury Header -->
@@ -105,6 +105,17 @@
         </div>
       </section>
 
+      <!-- Membresías Banner -->
+      <section class="banner-section">
+        <div class="container">
+          <div class="banner-content">
+            <h2 class="reveal">Membresías Disponibles</h2>
+            <p class="reveal">Únete al club exclusivo y disfruta de beneficios ilimitados en todas nuestras villas.</p>
+            <a href="https://wa.me/528121912778" class="btn-primary reveal">MÁS INFORMACIÓN</a>
+          </div>
+        </div>
+      </section>
+
       <!-- Documents -->
       <section id="manuals" class="docs-section">
         <div class="container">
@@ -130,7 +141,15 @@
       </section>
     </main>
 
-    <!-- The Concierge (Floating Bot) -->
+    <footer class="footer">
+      <div class="container">
+        <h2 class="logo" style="color: var(--dark); margin-bottom: 10px;">VIVE<span>LIBRE</span></h2>
+        <p>&copy; 2025 Vive Libre Travel Club. Todos los derechos reservados.</p>
+        <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 15px; letter-spacing: 1px;">Página desarrollada por <strong>AgenteWeb</strong></p>
+      </div>
+    </footer>
+
+    <!-- The Concierge (Floating Bot Trigger - Only one Sergio) -->
     <div class="bot-trigger" id="bot-launcher">
       <i data-lucide="leaf"></i>
     </div>
@@ -145,12 +164,6 @@
           </div>
         </div>
         <div style="display: flex; gap: 12px; align-items: center;">
-          <button id="toggle-voice" title="Iniciar Voz" style="background: none; border: none; color: #ccc; cursor: pointer; display: flex; align-items: center;">
-            <i data-lucide="power"></i>
-          </button>
-          <button id="toggle-mute" title="Mute/Unmute" style="background: none; border: none; color: #ccc; cursor: pointer; display: flex; align-items: center;">
-            <i data-lucide="mic"></i>
-          </button>
           <button id="close-bot"><i data-lucide="x"></i></button>
         </div>
       </div>
@@ -162,13 +175,6 @@
         <button id="send-bot-msg"><i data-lucide="send"></i></button>
       </div>
     </div>
-
-    <footer class="footer">
-      <div class="container">
-        <a href="#" class="logo">VIVE<span>LIBRE</span></a>
-        <p>&copy; 2025 Vive Libre Travel Club. Todos los derechos reservados.</p>
-      </div>
-    </footer>
 
     <!-- Mobile Bottom Navigation (Only visible on Mobile) -->
     <nav class="mobile-bottom-nav">
