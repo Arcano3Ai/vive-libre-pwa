@@ -63,8 +63,7 @@ app.post('/api/chat', async (req, res) => {
 // --- 5. SERVIR WEB Y PWA ---
 app.use(express.static(distPath));
 
-// CORRECCIÓN EXPRESS 5: Wildcard debe ser (.*) o regex
-app.get('/:path((.*))', (req, res) => {
+app.get('/*', (req, res) => {
     if (req.path.startsWith('/api')) return;
     const index = path.join(distPath, 'index.html');
     if (fs.existsSync(index)) res.sendFile(index);
