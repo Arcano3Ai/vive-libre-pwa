@@ -90,7 +90,13 @@ body {
   background: var(--primary); color: #fff; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; z-index: 1000; box-shadow: 0 10px 30px rgba(232, 133, 43, 0.3);
+  transition: var(--transition);
 }
+.bot-trigger i { width: 30px; height: 30px; }
+.bot-trigger:hover { transform: scale(1.1) rotate(15deg); }
+
+/* Hide old widget if still injected by script */
+#vive-concierge-widget, .vive-chat-trigger { display: none !important; }
 .bot-panel {
   position: fixed; bottom: 100px; right: 30px; width: 380px; height: 550px;
   background: #fff; border-radius: 12px; display: flex; flex-direction: column;
