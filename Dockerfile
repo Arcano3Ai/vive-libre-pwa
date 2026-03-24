@@ -1,22 +1,23 @@
-# Stage 1: Build
-FROM node:20 AS builder
+# Usar Node.js
+FROM node:20
+
+# Crear directorio de trabajo
 WORKDIR /app
+
+# Copiar archivos de dependencias
 COPY package*.json ./
+
+# Instalar TODO (incluye herramientas de build)
 RUN npm install
+
+# Copiar el resto del proyecto
 COPY . .
+
+# Realizar el build de Vite
 RUN npm run build
 
-# Stage 2: Run
-FROM node:20-slim
-WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/server.js ./
-COPY --from=builder /app/agents ./agents
-RUN npm install --production
-
-# Google Cloud Run standard port
+# Abrir el puerto (Google usará PORT env var)
 EXPOSE 8080
-ENV PORT=8080
 
+# Arrancar con node directamente
 CMD ["node", "server.js"]
