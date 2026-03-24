@@ -61,10 +61,16 @@ app.post('/api/chat', async (req, res) => {
 // --- 4. STATIC & SPA ---
 app.use(express.static(distPath));
 
-// EXPRESS 5 SAFE WILDCARD
-app.get('/:any*', (req, res) => {
-    if (req.path.startsWith('/api')) return;
+// COMPATIBILIDAD TOTAL EXPRESS 5 PARA SPA
+app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
     const index = path.join(distPath, 'index.html');
     if (fs.existsSync(index)) res.sendFile(index);
     else res.status(404).send('Not Found');
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error('Server Error:', err);
+    res.status(500).send('Internal Server Error');
 });
