@@ -158,7 +158,31 @@ body {
 .doc-item i { color: var(--primary); width: 32px; height: 32px; flex-shrink: 0; }
 .doc-item span { font-weight: 700; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; }
 
-.footer { padding: 80px 0; border-top: 1px solid var(--border); text-align: center; background: #fff; }
+.footer { 
+  padding: 80px 0 100px; 
+  border-top: 1px solid var(--border); 
+  text-align: center; 
+  background: var(--bg-soft); 
+}
+.footer .logo { 
+  font-size: 2rem; 
+  font-weight: 900;
+  display: block; 
+  margin-bottom: 20px; 
+  color: var(--dark); 
+  letter-spacing: 5px;
+  text-decoration: none;
+}
+.footer .logo span { color: var(--primary); }
+.footer p { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 5px; }
+.footer .agente-credit { 
+  margin-top: 25px; 
+  font-size: 0.7rem; 
+  letter-spacing: 2px; 
+  text-transform: uppercase; 
+  opacity: 0.5; 
+}
+.footer .agente-credit strong { color: var(--primary); font-weight: 800; }
 
 /* --- MOBILE APP UI (ONLY < 768px) --- */
 .mobile-bottom-nav { display: none; }
