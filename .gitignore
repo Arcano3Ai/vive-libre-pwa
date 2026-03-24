@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+*.log
+error_log.txt
+server_output.log
+package-lock.json
+.vscode/
+.DS_Store
+*.tmp
+.gemini/
+.agent/
+temp/

@@ -7,17 +7,17 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install all dependencies (including devDependencies for Vite build)
+# Install dependencies
 RUN npm install
 
-# Copy project files
+# Copy all project files
 COPY . .
 
-# Build the frontend
+# Build the frontend (creates /dist)
 RUN npm run build
 
-# Expose port (Cloud Run will use its own, but we document it)
+# Port 8080 is the Cloud Run default
 EXPOSE 8080
 
-# Start the server
-CMD ["node", "server.js"]
+# Start server
+CMD ["npm", "start"]

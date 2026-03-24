@@ -132,7 +132,7 @@
         <button class="vive-chat-close" id="vive-close">&times;</button>
       </div>
       <div class="vive-chat-messages" id="vive-messages">
-        <div class="vive-msg bot">¡Hola! Soy Sergio, tu experto en Vive Libre. ¿Buscas una escapada de lujo o un retiro para tu equipo?</div>
+        <div class="vive-msg bot">¡Hola! Soy Sergio, tu experto en Vive Libre. ¿En qué puedo ayudarte hoy?</div>
       </div>
       <div class="vive-chat-input-area">
         <input type="text" class="vive-chat-input" id="vive-input" placeholder="Pregunta algo...">
@@ -156,12 +156,15 @@
   launcher.addEventListener('click', toggleChat);
   closeBtn.addEventListener('click', toggleChat);
 
+  let chatHistory = [];
+
   const addMessage = (text, type) => {
     const div = document.createElement('div');
     div.className = `vive-msg ${type}`;
     div.innerText = text;
     messagesContainer.appendChild(div);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    chatHistory.push({ role: type, text: text });
   };
 
   const sendMessage = async () => {
@@ -171,10 +174,29 @@
     addMessage(text, 'user');
     input.value = '';
 
-    // Simulación de respuesta IA (Enlazar con tu API real aquí)
-    setTimeout(() => {
-      addMessage("Recibido. Estoy analizando las mejores opciones de cabañas para ti en Santiago...", 'bot');
-    }, 1000);
+    // Estado "escribiendo..."
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'vive-msg bot';
+    typingIndicator.innerText = '...';
+    messagesContainer.appendChild(typingIndicator);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history: chatHistory.slice(0, -1) })
+      });
+
+      if (!response.ok) throw new Error('Error en el servidor');
+      
+      const botResponse = await response.text();
+      messagesContainer.removeChild(typingIndicator);
+      addMessage(botResponse, 'bot');
+    } catch (error) {
+      messagesContainer.removeChild(typingIndicator);
+      addMessage("Lo lamento, he tenido un inconveniente técnico. Por favor, intenta de nuevo.", 'bot');
+      console.error('Chat Error:', error);
+    }
   };
 
   sendBtn.addEventListener('click', sendMessage);

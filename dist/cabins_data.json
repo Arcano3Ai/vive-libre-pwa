@@ -1,37 +1,79 @@
 [
   {
-    "id": "pajaro-azul",
-    "title": "Pájaro Azul",
-    "price": 3100,
-    "description": "Contenedor de lujo con ventana cenital para ver las estrellas.",
-    "images": ["img/image_1.jpg", "img/image_2.jpg", "img/image_3.jpg"]
-  },
-  {
     "id": "el-buho",
     "title": "El Búho",
     "price": 3900,
-    "description": "Inspiración africana en el corazón del bosque.",
-    "images": ["img/El-Buho.jpg", "img/image_4.jpg", "img/image_5.jpg"]
+    "description": "Experiencia de hospedaje que combina elegancia y naturaleza. Inspirada en las carpas africanas, ofrece un refugio íntimo y acogedor.",
+    "amenities": ["Fogatero de gas", "Malla de descanso volando", "Asador", "Calentador de gas", "Cocina equipada"],
+    "images": [
+      "/img/villas/el-buho/img_1.jpg",
+      "/img/villas/el-buho/img_2.jpg",
+      "/img/villas/el-buho/img_3.jpg"
+    ]
   },
   {
     "id": "el-colibri",
     "title": "El Colibrí",
     "price": 3900,
-    "description": "Diseño moderno y conexión total con la naturaleza.",
-    "images": ["img/El-Colibri.png", "img/image_6.jpg", "img/image_7.jpg"]
+    "description": "Cabaña moderna construida a partir de contenedores, pensada para una experiencia única en la naturaleza sin renunciar al confort.",
+    "amenities": ["1 cama Queen", "Baño exterior", "Asador de gas", "Fogatero de gas", "Jacuzzi (costo extra)"],
+    "images": [
+      "/img/villas/el-colibri/img_1.png",
+      "/img/villas/el-colibri/img_2.png"
+    ]
+  },
+  {
+    "id": "el-cotorro",
+    "title": "El Cotorro",
+    "price": 3900,
+    "description": "Villa de lujo diseñada para parejas que buscan desconectarse o celebrar algo especial. Ambiente cálido y elegante.",
+    "amenities": ["Alberca temp. ambiente", "Chimenea", "Cocina equipada", "Wifi", "Asador"],
+    "images": [
+      "/img/villas/el-cotorro/img_1.jpg",
+      "/img/villas/el-cotorro/img_2.jpg"
+    ]
   },
   {
     "id": "el-aguila",
     "title": "El Águila",
     "price": 3900,
-    "description": "Refugio alpino romántico y elegante.",
-    "images": ["img/El-Aguila.jpg", "img/image_8.jpg", "img/image_9.jpg"]
+    "description": "Espacio perfecto para parejas que buscan un escape romántico. Diseño tipo alpino, acogedor y elegante.",
+    "amenities": ["Chimenea", "Jacuzzi temp. ambiente", "Asador de gas", "Fogatero", "Wifi"],
+    "images": [
+      "/img/villas/el-aguila/img_1.jpg",
+      "/img/villas/el-aguila/img_2.jpg"
+    ]
+  },
+  {
+    "id": "el-aguila-2",
+    "title": "El Águila 2",
+    "price": 3900,
+    "description": "Cabaña alpina con estilo moderno que combina comodidad y calidez. Mayor amplitud y tina de baño.",
+    "amenities": ["1 cama Queen", "Tina de baño", "Chimenea", "Asador", "Fogatero"],
+    "images": [
+      "/img/villas/el-aguila-2/img_1.jpg",
+      "/img/villas/el-aguila-2/img_2.jpg"
+    ]
   },
   {
     "id": "la-cotorra",
     "title": "La Cotorra",
     "price": 16500,
-    "description": "Villa insignia con piscina infinita y bar privado.",
-    "images": ["img/La-Cotorra.webp", "img/image_10.jpg", "img/image_1.jpg"]
+    "description": "Cabaña de lujo con vistas panorámicas privilegiadas. Ideal para grupos grandes o reuniones familiares.",
+    "amenities": ["3 habitaciones", "Infinity pool", "Bar", "Pantalla de TV", "Asador", "Terraza"],
+    "images": [
+      "/img/villas/la-cotorra/img_1.webp",
+      "/img/villas/la-cotorra/img_2.jpg"
+    ]
+  },
+  {
+    "id": "pajaro-azul",
+    "title": "Pájaro Azul",
+    "price": 3100,
+    "description": "Contenedor de lujo con ventana cenital para ver las estrellas desde la cama. El refugio ideal para aventureros.",
+    "amenities": ["Ventana cenital", "Cocina básica", "Fogatero", "Área de descanso"],
+    "images": [
+      "/img/image_9.jpg"
+    ]
   }
 ]

@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vive Libre | Resort Glamping de Lujo</title>
+    <!-- PWA / iOS Meta Tags -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#e8852b" />
+    <link rel="apple-touch-icon" href="/img/logo-pwa-192.png" />
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +22,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script type="module" crossorigin src="./assets/index-asjkDZrq.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-D59toL0I.css">
+    <script type="module" crossorigin src="/assets/index-DITFgFeY.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-7Y73nXsd.css">
   </head>
   <body>
     <!-- Clean Luxury Header -->
@@ -35,7 +42,7 @@
     <main>
       <!-- Hero Section -->
       <section class="hero-section" id="hero">
-        <div class="parallax-bg hero-bg" style="background-image: url('img/ElCotorro-ExteriorHero.jpg');"></div>
+        <div class="parallax-bg hero-bg" style="background-image: url('/img/ElCotorro-ExteriorHero.jpg');"></div>
         <div class="hero-visual" id="hero-visual"></div>
         <div class="hero-content">
           <h4 class="reveal">Santiago, Nuevo León</h4>
@@ -75,7 +82,7 @@
               </ul>
             </div>
             <div class="resort-image reveal">
-              <img src="img/image_4.jpg" alt="Experiencia" />
+              <img src="/img/image_4.jpg" alt="Experiencia" />
             </div>
           </div>
         </div>
@@ -92,7 +99,7 @@
               <a href="https://wa.me/528121912778" class="btn-outline">MÁS INFORMACIÓN</a>
             </div>
             <div class="resort-image reveal">
-              <img src="img/Home-TeamBuilding-Banner.jpg" alt="Team Building" />
+              <img src="/img/Home-TeamBuilding-Banner.jpg" alt="Team Building" />
             </div>
           </div>
         </div>
@@ -102,17 +109,21 @@
       <section id="manuals" class="docs-section">
         <div class="container">
           <div class="docs-grid">
-            <a href="manuals/REGLAMENTO - VIVE LIBRE 2025.pdf" target="_blank" class="doc-item reveal">
+            <a href="/manuals/REGLAMENTO - VIVE LIBRE 2025.pdf" target="_blank" class="doc-item reveal">
               <i data-lucide="file-text"></i>
               <span>Reglamento 2025</span>
             </a>
-            <a href="manuals/INSTRUCTIVO - VIVE LIBRE 2025.pdf" target="_blank" class="doc-item reveal">
+            <a href="/manuals/INSTRUCTIVO - VIVE LIBRE 2025.pdf" target="_blank" class="doc-item reveal">
               <i data-lucide="info"></i>
               <span>Instructivo</span>
             </a>
-            <a href="manuals/POLITICA DE HOSPEDAJE - VIVE LIBRE 2025.pdf" target="_blank" class="doc-item reveal">
+            <a href="/manuals/POLITICA DE HOSPEDAJE - VIVE LIBRE 2025.pdf" target="_blank" class="doc-item reveal">
               <i data-lucide="shield"></i>
               <span>Políticas</span>
+            </a>
+            <a href="/manuals/CARTA RESPONSIVA - VIVE LIBRE 2025.pdf" target="_blank" class="doc-item reveal">
+              <i data-lucide="pen-tool"></i>
+              <span>Carta Responsiva</span>
             </a>
           </div>
         </div>
@@ -127,16 +138,24 @@
     <div class="bot-panel" id="bot-window">
       <div class="bot-header">
         <div class="bot-info">
-          <div class="bot-avatar">VL</div>
+          <div class="bot-avatar">S</div>
           <div>
-            <h4>Mayordomo</h4>
+            <h4>Sergio</h4>
             <span class="online">En línea</span>
           </div>
         </div>
-        <button id="close-bot"><i data-lucide="x"></i></button>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <button id="toggle-voice" title="Iniciar Voz" style="background: none; border: none; color: #ccc; cursor: pointer; display: flex; align-items: center;">
+            <i data-lucide="power"></i>
+          </button>
+          <button id="toggle-mute" title="Mute/Unmute" style="background: none; border: none; color: #ccc; cursor: pointer; display: flex; align-items: center;">
+            <i data-lucide="mic"></i>
+          </button>
+          <button id="close-bot"><i data-lucide="x"></i></button>
+        </div>
       </div>
       <div class="bot-chat" id="bot-messages">
-        <div class="msg bot">Distinguidos días. ¿Cómo puedo asistirle con su reserva en Vive Libre?</div>
+        <div class="msg bot">¡Hola! Soy Sergio, tu Concierge en Vive Libre. ¿En qué te puedo ayudar hoy?</div>
       </div>
       <div class="bot-footer">
         <input type="text" id="bot-input" placeholder="Escriba su mensaje..." />
@@ -151,8 +170,36 @@
       </div>
     </footer>
 
+    <!-- Mobile Bottom Navigation (Only visible on Mobile) -->
+    <nav class="mobile-bottom-nav">
+      <a href="#hero" class="nav-item">
+        <i data-lucide="home"></i>
+        <span>Inicio</span>
+      </a>
+      <a href="#collection" class="nav-item">
+        <i data-lucide="map-pin"></i>
+        <span>Villas</span>
+      </a>
+      <a href="https://wa.me/528121912778" class="nav-item highlight">
+        <i data-lucide="calendar"></i>
+        <span>Reservar</span>
+      </a>
+      <a href="#manuals" class="nav-item">
+        <i data-lucide="file-text"></i>
+        <span>Docs</span>
+      </a>
+    </nav>
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    <script type="module" src="/vive-concierge-widget.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW Registration failed', err));
+        });
+      }
+    </script>
   </body>
 </html>
